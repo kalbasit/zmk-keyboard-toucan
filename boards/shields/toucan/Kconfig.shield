@@ -3,3 +3,17 @@ config SHIELD_TOUCAN_LEFT
 
 config SHIELD_TOUCAN_RIGHT
     def_bool $(shields_list_contains,toucan_right)
+
+if SHIELD_TOUCAN_LEFT || SHIELD_TOUCAN_RIGHT
+
+config TOUCAN_SCROLL_DIVISOR
+    int "Trackpad scroll speed divisor"
+    default 5
+    range 1 1000
+    help
+      Divisor applied to raw trackpad scroll deltas. The effective scroll
+      speed is 1/TOUCAN_SCROLL_DIVISOR of the raw input. Increase this
+      value to slow down scrolling (e.g. 10 = half speed, 20 = quarter
+      speed vs. the default of 5). Set in your zmk-config's toucan.conf.
+
+endif # SHIELD_TOUCAN_LEFT || SHIELD_TOUCAN_RIGHT
